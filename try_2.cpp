@@ -1,3 +1,9 @@
+//extern "C" __declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
+#include <Windows.h>
+extern "C" {
+	_declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
+}
+
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "iostream"
@@ -15,6 +21,71 @@
 #include "Shader.h"
 #include "math.h"
 
+class Blocks :public CubeModel
+{
+public:
+	Blocks();
+	void inNeed();
+	~Blocks();
+
+private:
+	char* AllData;
+	bool visualable;
+};
+
+Blocks::Blocks()
+{
+	AllData = NULL;
+	visualable = false;
+}
+
+Blocks::~Blocks()
+{
+}
+void Blocks::inNeed()
+{
+	char* dataInNeed;
+	if (AllData == NULL)
+	{
+		std::cerr << "blaocksdata_error!" << std::endl;
+	}
+	else if (visualable == false)
+	{
+		dataInNeed = new char[16 * 16 * 16];
+	}
+	else
+	{
+
+	}
+
+}
+
+char* blocksdata_couldsee(char* data_in)
+{
+	short x = 0, y = 0, z = 0;
+	char out[16][16][16] = { 0 };
+	while (x < 16)
+	{
+		while (y < 16)
+		{
+			while (z < 16)
+			{
+				if (data_in[x * 16 * 16 + y * 16 + z + 1 == 0])
+				{
+					out[x][y][z] = data_in[x * 16 * 16 + y * 16 + z];
+				}
+				else
+				{
+					out[16][16][16] = 0;
+				}
+				z++;
+			}
+			y++;
+		}
+		x++;
+	}
+	return 0;
+}
 class TextureBuffer
 {
 public:
@@ -50,6 +121,8 @@ TextureBuffer::TextureBuffer(std::string Texture_path)
 	glBindTexture(GL_TEXTURE_2D, NULL);
 }
 
+unsigned num = 100;
+
 class CubeModel :public Shader
 {
 public:
@@ -63,6 +136,7 @@ public:
 protected:
 	unsigned VAO;
 	unsigned VBO;
+	unsigned intancedVBO;
 	unsigned EBO;
 };
 CubeModel::CubeModel()
@@ -70,10 +144,12 @@ CubeModel::CubeModel()
 	progID = 0;
 	VAO = 0;
 	VBO = 0;
+	intancedVBO = 0;
 	EBO = 0;
 };
 CubeModel::CubeModel(std::string vertexShader_path, std::string fragmentShader_path) :Shader(vertexShader_path, fragmentShader_path)
 {
+
 	float vertex[]
 	{
 		//ÕýÃæ
@@ -128,8 +204,18 @@ CubeModel::CubeModel(std::string vertexShader_path, std::string fragmentShader_p
 		20,	21,	23,
 		21,	22,	23,
 	};
+
+	glm::mat4* mt = new glm::mat4[num];
+	for (size_t i = 0; i < num; i++)
+	{
+		mt[i] = glm::mat4(glm::translate(glm::mat4(), glm::vec3(i, i * i, i + 1)));
+	}
+
+
 	glGenVertexArrays(1, &VAO);
+
 	glBindVertexArray(VAO);
+
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex), vertex, GL_STATIC_DRAW);
@@ -137,9 +223,31 @@ CubeModel::CubeModel(std::string vertexShader_path, std::string fragmentShader_p
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
+
+	glGenBuffers(1, &intancedVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, intancedVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * num, mt, GL_STATIC_DRAW);
+	glVertexAttribPointer(2, glm::vec4().length(), GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)0);
+	glEnableVertexAttribArray(2);
+	glVertexAttribDivisor(2, 1);
+
+	glVertexAttribPointer(3, glm::vec4().length(), GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(glm::vec4)));
+	glEnableVertexAttribArray(3);
+	glVertexAttribDivisor(3, 1);
+
+	glVertexAttribPointer(4, glm::vec4().length(), GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(2 * sizeof(glm::vec4)));
+	glEnableVertexAttribArray(4);
+	glVertexAttribDivisor(4, 1);
+
+	glVertexAttribPointer(5, glm::vec4().length(), GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(3 * sizeof(glm::vec4)));
+	glEnableVertexAttribArray(5);
+	glVertexAttribDivisor(5, 1);
+
 	glGenBuffers(1, &EBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicat), indicat, GL_STATIC_DRAW);
+
+	glBindVertexArray(NULL);
 };
 
 void GLinti(GLFWwindow*& window);
@@ -156,6 +264,8 @@ Camera c;
 CubeModel m;
 float deltatime;
 
+
+
 int main()
 {
 	GLFWwindow* window;
@@ -164,7 +274,7 @@ int main()
 	c = Camera(glm::vec3(0, 0, 4));
 	TextureBuffer t("grass_top.png");
 
-	glm::mat4 model(glm::translate(glm::mat4(), glm::vec3(0.0f, 0.0f, 0.0f))), view = c.GetViewMatrix(), projection = glm::perspective(/*glm::radians(45.0f)*/45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 100.0f);
+	glm::mat4 view = c.GetViewMatrix(), projection = glm::perspective(/*glm::radians(45.0f)*/45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 100.0f);
 
 	float now, lastframetime;
 	lastframetime = glfwGetTime();
@@ -177,11 +287,11 @@ int main()
 		m.useShaderProg();
 		glBindVertexArray(m.getVAO());
 		t.Enabletexture();
-		m.setMat4("model", glm::value_ptr(model));
 		view = c.GetViewMatrix();
-		m.setMat4("view", glm::value_ptr(view)); 
+		m.setMat4("view", glm::value_ptr(view));
 		m.setMat4("projection", glm::value_ptr(projection));
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
+		glDrawElementsInstanced(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL, num);
+		//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
 		t.Disabletexture();
 
 		glfwSwapBuffers(window);
