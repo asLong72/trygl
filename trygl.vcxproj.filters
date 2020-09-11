@@ -13,7 +13,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="源文件\NewFilter1">
+    <Filter Include="源文件\编译指南">
       <UniqueIdentifier>{2a05ddbc-0df7-4b22-897d-2ed5a0bfe993}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -88,10 +88,13 @@
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="try.cpp">
-      <Filter>源文件\NewFilter1</Filter>
+      <Filter>源文件\编译指南</Filter>
     </ClCompile>
     <ClCompile Include="try_2.cpp">
-      <Filter>源文件\NewFilter1</Filter>
+      <Filter>源文件\编译指南</Filter>
+    </ClCompile>
+    <ClCompile Include="3-实例化.cpp">
+      <Filter>源文件\编译指南</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +114,21 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="Shader_try.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Shader_3.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Shader_3.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Shader_3_textinctance.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Shader4.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Shader-8.vs">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

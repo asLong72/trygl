@@ -171,13 +171,19 @@
     <ClCompile Include="模板.cpp" />
     <ClCompile Include="try.cpp" />
     <ClCompile Include="try_2.cpp" />
+    <ClCompile Include="3-实例化.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cubeShader.fs" />
     <None Include="cubeShader.vs" />
+    <None Include="Shader-8.vs" />
     <None Include="Shader.fs" />
     <None Include="Shader.vs" />
     <None Include="Shader3D.vs" />
+    <None Include="Shader4.vs" />
+    <None Include="Shader_3.fs" />
+    <None Include="Shader_3.vs" />
+    <None Include="Shader_3_textinctance.vs" />
     <None Include="Shader_try.vs" />
   </ItemGroup>
   <ItemGroup>

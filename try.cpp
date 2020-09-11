@@ -1,9 +1,9 @@
 //#include "glad/glad.h"
-//#include "GLFW/glfw3.h"
+//#include "glfw/glfw3.h"
 //#include "iostream"
 //#include "fstream"
 //#include "strstream"
-//#define STB_IMAGE_IMPLEMENTATION
+//#define stb_image_implementation
 ////预处理器会修改头文件，让其只包含相关的函数定义源码
 ////等于是将这个头文件变为一个 .cpp 文件了
 ////现在只需要在你的程序中包含stb_image.h并编译就可以了
@@ -11,7 +11,7 @@
 //#include "glm/glm.hpp"
 //#include "glm/gtc/matrix_transform.hpp"
 //#include "glm/gtc/type_ptr.hpp"
-//#include "Camera.h"
+//#include "camera.h"
 //#include "Shader.h"
 //#include "math.h"
 //
@@ -21,112 +21,112 @@
 //public:
 //	cubemodel();
 //	cubemodel(std::string, std::string);
-//	inline unsigned getVAO() { return VAO; };
-//	inline unsigned getVBO() { return VBO; };
-//	inline unsigned getEBO() { return EBO; };
+//	inline unsigned getvao() { return vao; };
+//	inline unsigned getvbo() { return vbo; };
+//	inline unsigned getebo() { return ebo; };
 //	~cubemodel() {};
 //
 //protected:
-//	unsigned VAO;
-//	unsigned VBO;
-//	unsigned EBO;
+//	unsigned vao;
+//	unsigned vbo;
+//	unsigned ebo;
 //};
-//void framebufferSize_callback(GLFWwindow*, int, int);
-//void key_callback(GLFWwindow*, int, int, int, int);
-////glfwSetMouseButtonCallback(window, mouseButton_callback);
-//void mousePosition_callback(GLFWwindow*, double, double);
+//void framebuffersize_callback(glfwwindow*, int, int);
+//void key_callback(glfwwindow*, int, int, int, int);
+////glfwsetmousebuttoncallback(window, mousebutton_callback);
+//void mouseposition_callback(glfwwindow*, double, double);
 //
 //
 //cubemodel test;
-//Camera c;
+//camera c;
 //int main()
 //{
-//	glfwInit();
-//	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-//	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-//	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-//	GLFWwindow* window = glfwCreateWindow(1080, 720, "test", NULL, NULL);
-//	while (window == NULL)
+//	glfwinit();
+//	glfwwindowhint(glfw_context_version_major, 3);
+//	glfwwindowhint(glfw_context_version_minor, 3);
+//	glfwwindowhint(glfw_opengl_profile, glfw_opengl_core_profile);
+//	glfwwindow* window = glfwcreatewindow(1080, 720, "test", null, null);
+//	while (window == null)
 //	{
 //		std::cout << "" << std::endl;
 //		return -1;
 //	}
-//	glfwMakeContextCurrent(window);
-//	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-//		std::cout << "Failed to initialize GLAD" << std::endl;
+//	glfwmakecontextcurrent(window);
+//	if (!gladloadglloader((gladloadproc)glfwgetprocaddress)) {
+//		std::cout << "failed to initialize glad" << std::endl;
 //		exit(-1);
 //	}
-//	glfwSetFramebufferSizeCallback(window, framebufferSize_callback);
-//	glfwSetKeyCallback(window, key_callback);
-//	//glfwSetMouseButtonCallback(window, mouseButton_callback);
-//	glfwSetCursorPosCallback(window, mousePosition_callback);
-//	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-//	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+//	glfwsetframebuffersizecallback(window, framebuffersize_callback);
+//	glfwsetkeycallback(window, key_callback);
+//	//glfwsetmousebuttoncallback(window, mousebutton_callback);
+//	glfwsetcursorposcallback(window, mouseposition_callback);
+//	glfwsetinputmode(window, glfw_cursor, glfw_cursor_normal);
+//	glclearcolor(0.2f, 0.3f, 0.3f, 1.0f);
 //
-//	unsigned textureID;
-//	glGenTextures(1, &textureID);
-//	glBindTexture(GL_TEXTURE_2D, textureID);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-//	int width, height, nrChannels;
+//	unsigned textureid;
+//	glgentextures(1, &textureid);
+//	glbindtexture(gl_texture_2d, textureid);
+//	gltexparameteri(gl_texture_2d, gl_texture_wrap_s, gl_repeat);
+//	gltexparameteri(gl_texture_2d, gl_texture_wrap_t, gl_repeat);
+//	gltexparameteri(gl_texture_2d, gl_texture_min_filter, gl_nearest_mipmap_nearest);
+//	gltexparameteri(gl_texture_2d, gl_texture_mag_filter, gl_nearest_mipmap_nearest);
+//	int width, height, nrchannels;
 //	unsigned char* data;
-//	data = stbi_load("375px-Mr._Quin.jpg", &width, &height, &nrChannels, 0);
+//	data = stbi_load("375px-mr._quin.jpg", &width, &height, &nrchannels, 0);
 //	if (data)
 //	{
-//		glTexImage2D(GL_TEXTURE_2D, 0, nrChannels == 3 ? GL_RGB : GL_RGBA, width, height, 0, nrChannels == 3 ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, data);
-//		glGenerateMipmap(GL_TEXTURE_2D);
+//		glteximage2d(gl_texture_2d, 0, nrchannels == 3 ? gl_rgb : gl_rgba, width, height, 0, nrchannels == 3 ? gl_rgb : gl_rgba, gl_unsigned_byte, data);
+//		glgeneratemipmap(gl_texture_2d);
 //	}
 //	else
 //	{
-//		std::cout << "Failed to load texture" << std::endl;
+//		std::cout << "failed to load texture" << std::endl;
 //	}
 //	stbi_image_free(data);					//释放图像的内存
 //
-//	glBindVertexArray(0);
-//	glBindBuffer(GL_ARRAY_BUFFER, 0);
-//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-//	glBindTexture(GL_TEXTURE_2D, 0);
+//	glbindvertexarray(0);
+//	glbindbuffer(gl_array_buffer, 0);
+//	glbindbuffer(gl_element_array_buffer, 0);
+//	glbindtexture(gl_texture_2d, 0);
 //
-//	test = cubemodel("Shader_try.vs", "Shader.fs");
-//	c = Camera(glm::vec3(0.0f, 0.0f, 4.0f));
+//	test = cubemodel("shader_try.vs", "shader.fs");
+//	c = camera(glm::vec3(0.0f, 0.0f, 4.0f));
 //	glm::mat4 model = glm::translate(glm::mat4(), glm::vec3(0, 0, -1)), view, projection;
 //	projection = glm::perspective(/*glm::radians(45.0f)*/45.0f, (float)1080 / (float)720, 0.1f, 100.0f);
 //
-//	while (!glfwWindowShouldClose(window))
+//	while (!glfwwindowshouldclose(window))
 //	{
-//		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//		glclear(gl_color_buffer_bit | gl_depth_buffer_bit);
 //
 //
 //
-//		test.useShaderProg();
-//		glBindVertexArray(test.getVAO());
-//		glBindBuffer(GL_ARRAY_BUFFER, test.getVBO());
-//		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, test.getEBO());
-//		glBindTexture(GL_TEXTURE_2D, textureID);
-//		test.setMat4("model", glm::value_ptr(model));
-//		view = c.GetViewMatrix();
-//		test.setMat4("view", glm::value_ptr(view));
-//		test.setMat4("projection", glm::value_ptr(projection));
+//		test.useshaderprog();
+//		glbindvertexarray(test.getvao());
+//		glbindbuffer(gl_array_buffer, test.getvbo());
+//		glbindbuffer(gl_element_array_buffer, test.getebo());
+//		glbindtexture(gl_texture_2d, textureid);
+//		test.setmat4("model", glm::value_ptr(model));
+//		view = c.getviewmatrix();
+//		test.setmat4("view", glm::value_ptr(view));
+//		test.setmat4("projection", glm::value_ptr(projection));
 //
-//		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-//		glBindVertexArray(NULL);
-//		glBindTexture(GL_TEXTURE_2D, NULL);
+//		gldrawelements(gl_triangles, 36, gl_unsigned_int, 0);
+//		glbindvertexarray(null);
+//		glbindtexture(gl_texture_2d, null);
 //
-//		glfwSwapBuffers(window);
-//		glfwPollEvents();
+//		glfwswapbuffers(window);
+//		glfwpollevents();
 //	}
-//	glfwTerminate();
+//	glfwterminate();
 //	return 0;
 //}
 //
 //cubemodel::cubemodel()
 //{
-//	progID = 0;
-//	VAO = 0;
-//	VBO = 0;
-//	EBO = 0;
+//	progid = 0;
+//	vao = 0;
+//	vbo = 0;
+//	ebo = 0;
 //}
 //cubemodel::cubemodel(std::string vertexshader_path, std::string fragmentshader_path)
 //{
@@ -183,52 +183,52 @@
 //		0,	0,	0,		//左下
 //		0,	0,	0,		//右上
 //	};
-//	this->progID = Shader(vertexshader_path, fragmentshader_path).getProgID();
-//	glGenVertexArrays(1, &VAO);
-//	glBindVertexArray(VAO);
-//	glGenBuffers(1, &VBO);
-//	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-//	glBufferData(VBO, sizeof(vertices), vertices, GL_STATIC_DRAW);
-//	glGenBuffers(1, &EBO);
-//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VBO);
-//	glBufferData(EBO, sizeof(indicat), indicat, GL_STATIC_DRAW);
+//	this->progid = shader(vertexshader_path, fragmentshader_path).getprogid();
+//	glgenvertexarrays(1, &vao);
+//	glbindvertexarray(vao);
+//	glgenbuffers(1, &vbo);
+//	glbindbuffer(gl_array_buffer, vbo);
+//	glbufferdata(vbo, sizeof(vertices), vertices, gl_static_draw);
+//	glgenbuffers(1, &ebo);
+//	glbindbuffer(gl_element_array_buffer, ebo);
+//	glbindbuffer(gl_element_array_buffer, vbo);
+//	glbufferdata(ebo, sizeof(indicat), indicat, gl_static_draw);
 //
-//	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-//	glEnableVertexAttribArray(0);
-//	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-//	glEnableVertexAttribArray(1);
-//	std::cout<< VAO<<"|" << VBO << "|" << EBO << "|"<<std::endl;
-//	glBindVertexArray(NULL);
-//	glUseProgram(NULL);
+//	glvertexattribpointer(0, 3, gl_float, gl_false, 5 * sizeof(float), (void*)0);
+//	glenablevertexattribarray(0);
+//	glvertexattribpointer(1, 2, gl_float, gl_false, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+//	glenablevertexattribarray(1);
+//	std::cout<< vao<<"|" << vbo << "|" << ebo << "|"<<std::endl;
+//	glbindvertexarray(null);
+//	gluseprogram(null);
 //}
 //
-//void framebufferSize_callback(GLFWwindow* window, int width, int height)
+//void framebuffersize_callback(glfwwindow* window, int width, int height)
 //{
-//	glViewport(0, 0, width, height);
+//	glviewport(0, 0, width, height);
 //}
-//void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+//void key_callback(glfwwindow* window, int key, int scancode, int action, int mods)
 //{
-//	if (action == GLFW_REPEAT || action == GLFW_PRESS)
+//	if (action == glfw_repeat || action == glfw_press)
 //	{
 //		switch (key)
 //		{
-//		case GLFW_KEY_W:
+//		case glfw_key_w:
 //
 //			break;
-//		case GLFW_KEY_S:
+//		case glfw_key_s:
 //
 //			break;
-//		case GLFW_KEY_A:
+//		case glfw_key_a:
 //
 //			break;
-//		case GLFW_KEY_D:
+//		case glfw_key_d:
 //
 //			break;
-//		case GLFW_KEY_SPACE:
+//		case glfw_key_space:
 //
 //			break;
-//		case GLFW_KEY_LEFT_SHIFT:
+//		case glfw_key_left_shift:
 //
 //			break;
 //		default:
@@ -238,8 +238,8 @@
 //	}
 //
 //}
-////glfwSetMouseButtonCallback(window, mouseButton_callback);
-//void mousePosition_callback(GLFWwindow* window, double xpos, double ypos)
+////glfwsetmousebuttoncallback(window, mousebutton_callback);
+//void mouseposition_callback(glfwwindow* window, double xpos, double ypos)
 //{
 //
 //
