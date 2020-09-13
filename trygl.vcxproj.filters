@@ -142,6 +142,9 @@
     <Image Include="grass_top.png">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="dirt.png">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -150,5 +153,10 @@
     <ClInclude Include="mesh.h">
       <Filter>头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shader_3_textinctance.fs">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

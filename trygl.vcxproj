@@ -188,12 +188,16 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="375px-Mr._Quin.jpg" />
+    <Image Include="dirt.png" />
     <Image Include="grass_top.png" />
     <Image Include="神必.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mesh.h" />
     <ClInclude Include="Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shader_3_textinctance.fs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

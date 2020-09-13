@@ -38,7 +38,7 @@ Shader::Shader(std::string vertexPath_in, std::string fragmentPath_in)
 
 	try
 	{
-		vertexCode_fstream.open(vertexPath_in);
+		vertexCode_fstream.open(vertexPath_in,std::ios::in);
 		vertexCode_strstream << vertexCode_fstream.rdbuf() << std::ends;
 		vertexCode_str = vertexCode_strstream.str();
 		vertexCode_fstream.close();
@@ -55,7 +55,7 @@ Shader::Shader(std::string vertexPath_in, std::string fragmentPath_in)
 
 	try
 	{
-		fragmentCode_fstream.open(fragmentPath_in);
+		fragmentCode_fstream.open(fragmentPath_in, std::ios::in);
 		fragmentCode_strstream << fragmentCode_fstream.rdbuf() << std::ends;
 		fragmentCode_str = fragmentCode_strstream.str();
 		fragmentCode_fstream.close();

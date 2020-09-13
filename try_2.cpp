@@ -403,7 +403,8 @@
 //	//
 //	//i.blocksdata_update(a);
 //
-//	glm::mat4 view = c.GetViewMatrix(), projection = glm::perspective(/*glm::radians(45.0f)*/45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 100.0f);
+//	glm::mat4 view = c.GetViewMatrix()
+//		, projection = glm::perspective(/*glm::radians(45.0f)*/45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 100.0f);
 //
 //	float now, lastframetime;
 //	lastframetime = glfwGetTime();
