@@ -277,7 +277,7 @@ CubeModel::CubeModel(std::string vertexShader_path, std::string fragmentShader_p
 		{
 			while (y < 16)
 			{
-				if (a[x][y][z] >= 0)
+				if (a[x][y][z])
 				{
 					mv.push_back(glm::translate(glm::mat4(), glm::vec3(x, y, z)));
 					text_ID.push_back((short)(a[x][y][z]));
@@ -290,7 +290,6 @@ CubeModel::CubeModel(std::string vertexShader_path, std::string fragmentShader_p
 		}
 		x++, z = 0;
 	}
-	std::cerr << a[15][15][15] << std::endl;
 
 	glGenVertexArrays(1, &VAO);
 
@@ -329,7 +328,7 @@ CubeModel::CubeModel(std::string vertexShader_path, std::string fragmentShader_p
 
 	glGenBuffers(1, &texInctanceVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, texInctanceVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(short) * text_ID.size(), text_ID.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * text_ID.size(), text_ID.data(), GL_STATIC_DRAW);
 
 	glVertexAttribPointer(6, 1, GL_UNSIGNED_INT, GL_FALSE, sizeof(GLuint), (void*)0);
 	glEnableVertexAttribArray(6);
@@ -339,6 +338,8 @@ CubeModel::CubeModel(std::string vertexShader_path, std::string fragmentShader_p
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicat), indicat, GL_STATIC_DRAW);
 
+
+	//std::cerr << text_ID.size() << "||"<< mv.size() <<std::endl;
 	glBindVertexArray(NULL);
 };
 
@@ -364,7 +365,7 @@ int main()
 	GLFWwindow* window;
 	GLinti(window);
 
-	m = CubeModel("Shader_3.vs", "Shader_3.fs");
+	//m = CubeModel("Shader_3.vs", "Shader_3.fs");
 	m2 = CubeModel("Shader_3_textinctance.vs", "Shader_3_textinctance.fs");
 	//i = Blocks("Shader_3_textinctance.vs", "Shader_3.fs");
 	c = Camera(glm::vec3(0, 0, 20));
@@ -393,15 +394,15 @@ int main()
 
 		processInput(window);
 
-		m.useShaderProg();
-		glBindVertexArray(m.getVAO());
-		t.Enabletexture();
-		view = c.GetViewMatrix();
-		m.setMat4("view", glm::value_ptr(view));
-		m.setMat4("projection", glm::value_ptr(projection));
-		m.setMat4("model", glm::value_ptr(model));
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
-		t.Disabletexture();
+		//m.useShaderProg();
+		//glBindVertexArray(m.getVAO());
+		//t.Enabletexture();
+		//view = c.GetViewMatrix();
+		//m.setMat4("view", glm::value_ptr(view));
+		//m.setMat4("projection", glm::value_ptr(projection));
+		//m.setMat4("model", glm::value_ptr(model));
+		//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
+		//t.Disabletexture();
 
 		m2.useShaderProg();
 		glBindVertexArray(m2.getVAO());
